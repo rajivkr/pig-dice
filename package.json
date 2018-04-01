@@ -8,11 +8,14 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
     "lite-server": "^2.3.0"
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "lite-server -c bs-config.json"
+    "dev": "lite-server"
   },
   "keywords": [],
   "author": "",
