@@ -6,5 +6,5 @@ var app = express();
 app.use(express.static(path.join('public')));
 
 app.listen(port, ()=>{
-   console.log(`Server started up st ${port}`);
+   console.log(`Server started up at ${port}`);
 });
