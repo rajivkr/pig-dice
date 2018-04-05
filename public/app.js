@@ -13,7 +13,7 @@ GAME RULES:
 //document.querySelector(`#current-${activePlayer}`).innerHTML = `<em> ${dice} </em>`;
 //var x = document.querySelector(`#score-0`).textContent;
 
-let scores, roundScore, activePlayer;
+let scores, roundScore, activePlayer, previousScore, dice;
 let gamePlaying;
 
 var nextPlayer = () => {
@@ -31,6 +31,7 @@ var init = function () {
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0;
+
     gamePlaying = true;
     document.querySelector(`.dice`).style.display = 'none';
     document.getElementById(`score-0`).textContent = 0;
@@ -47,18 +48,25 @@ var init = function () {
 };
 init();
 document.querySelector(`.btn-roll`).addEventListener('click', () => {
-
     if (gamePlaying) {
-        let dice = Math.floor(Math.random() * 6) + 1;
-        let diceDom = document.querySelector(`.dice`);
-        diceDom.style.display = 'block';
-        diceDom.src = 'dice-' + dice + '.png';
-
-        if (dice !== 1) {
-            roundScore += dice;
-            document.querySelector(`#current-${activePlayer}`).textContent = roundScore;
-        } else {
+        previousScore = dice;
+        dice = Math.floor(Math.random() * 6) + 1;
+        console.log(previousScore, dice);
+        if (previousScore === 6 && dice === 6) {
+            scores[activePlayer] = 0;
+            document.querySelector(`#score-${activePlayer}`).textContent = 0;
             nextPlayer();
+        } else {
+            let diceDom = document.querySelector(`.dice`);
+            diceDom.style.display = 'block';
+            diceDom.src = 'dice-' + dice + '.png';
+
+            if (dice !== 1) {
+                roundScore += dice;
+                document.querySelector(`#current-${activePlayer}`).textContent = roundScore;
+            } else {
+                nextPlayer();
+            }
         }
     }
 
